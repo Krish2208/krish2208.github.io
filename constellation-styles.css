@@ -1,0 +1,341 @@
+/* Constellation Explorer Styles */
+
+.constellation-explorer {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.constellation-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 12px;
+  flex: 1;
+  transition: flex 0.5s ease-in-out;
+}
+
+/* New expanded state for constellation container */
+.constellation-container.expanded {
+  flex: 1.5;
+}
+
+.night-sky {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #0a0e21 0%, #161b33 50%, #1a1c42 100%);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Subtle background star field texture */
+.night-sky::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.08) 0.5px,
+    transparent 0.5px
+  );
+  background-size: 20px 20px;
+  opacity: 0.4;
+}
+
+/* Background stars */
+.bg-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: twinkle 5s infinite alternate;
+}
+
+/* Main stars (projects) */
+.star {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  z-index: 50;
+}
+
+.star:hover {
+  transform: scale(1.8) !important;
+}
+
+.star.selected {
+  transform: scale(2) !important;
+  animation: pulse 2s infinite;
+}
+
+.star.highlighted {
+  animation: pulse 2s infinite;
+}
+
+/* Tooltips for stars */
+.star-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(17, 34, 64, 0.9);
+  color: var(--text);
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translateY(10px);
+  z-index: 100;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: max-content;
+  max-width: 200px;
+}
+
+.star:hover .star-tooltip {
+  opacity: 1;
+}
+
+/* Constellation connecting lines */
+.constellation-shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 40;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+
+.constellation:hover .constellation-shape {
+  opacity: 1;
+}
+
+/* Project detail panel */
+.project-detail-panel {
+  width: 350px;
+  background-color: var(--secondary);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+  flex: 0 0 350px;
+  height: 600px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
+}
+
+.project-detail-panel.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+.panel-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header h3 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.close-panel-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+}
+
+.close-panel-btn:hover {
+  color: var(--accent);
+}
+
+.panel-content {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.project-detail h3 {
+  color: var(--accent);
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.project-detail .project-date {
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.project-detail p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.project-detail .project-links {
+  display: flex;
+  gap: 15px;
+}
+
+.project-detail .project-links a {
+  color: var(--text);
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.project-detail .project-links a:hover {
+  color: var(--accent);
+}
+
+/* Constellation controls and legend */
+.constellation-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+.category-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  background-color: var(--secondary);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.legend-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.legend-item.active {
+  background-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.legend-color {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.legend-text {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+/* Animations */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 15px currentColor, 0 0 25px currentColor;
+  }
+  100% {
+    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+  }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1200px) {
+  .constellation-explorer {
+    flex-direction: column;
+  }
+
+  .constellation-container {
+    width: 100%;
+  }
+
+  .constellation-container.expanded {
+    flex: 1;
+  }
+
+  .project-detail-panel {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    flex: 0 0 auto;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .constellation-container {
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .constellation-container {
+    height: 400px;
+  }
+
+  .project-detail-panel {
+    max-height: 350px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .constellation-container {
+    height: 350px;
+  }
+
+  .legend-item {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+}
