@@ -8,8 +8,8 @@ const data = {
       {
         title: "B.Tech - Computer Science and Engineering",
         institute: "Indian Institute of Technology Indore",
-        score: "CPI: 9.51, Minor (Economics) CPI: 9.67",
-        duration: "2021 - Present",
+        score: "CPI: 9.50, Minor (Economics) CPI: 9.71",
+        duration: "2021 - 2025",
       },
     ],
   },
@@ -17,7 +17,7 @@ const data = {
     {
       title: "C++ Developer Intern (Part-time Remote)",
       company: "GoQuant Technologies, Inc.",
-      duration: "Dec 2024 - Present",
+      duration: "Dec 2024 - May 2025",
       points: [
         "Engineered a market data mining tool that aggregates public market data from major crypto exchanges (e.g., Deribit, Bybit, Binance, OKX), utilizing a NanoMsg-based Pub-Sub model to multiplex exchange connections across multiple clients.",
         "Built a consolidated order book system to aggregate and serve unified market depth across exchanges, based on configurable depth and precision parameters.",
@@ -179,7 +179,7 @@ const data = {
           href: "https://drive.google.com/file/d/163MKx8W3UFtNUL20tk-tE2o154iRw29n/view?usp=sharing",
           icon: "fas fa-file-pdf",
           title: "View Presentation",
-        }
+        },
       ],
     },
     {
